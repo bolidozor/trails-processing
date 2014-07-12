@@ -53,8 +53,8 @@ activate_sky_display = function(d3) {
     ser1.coordinates.push(ser2.coordinates[0]);
     boundary_data.SER = ser1;
 
-    var width = 560;
-    var height = 560;
+    var width = 900;
+    var height = 900;
 
     var constellation_at = function(ra, dec) {
         n = decision_data.length;
@@ -67,7 +67,7 @@ activate_sky_display = function(d3) {
     };
 
     var projection = d3.geo.azimuthalEqualArea()
-        .scale(200)
+        .scale(300)
         .translate([width / 2, height / 2])
         .clipAngle(90);
 

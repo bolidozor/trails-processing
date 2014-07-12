@@ -95,6 +95,10 @@ def build_star_data(magnitude_threshold):
         ]
 
 def build_trails_data(data):
+    """Builds meteor or other trails data.
+
+    Draws meteors trails from Meteor-observer smartphone Android application.
+    """
     beg_dec, beg_ra, end_dec, end_ra = np.zeros(len(data)), np.zeros(len(data)), np.zeros(len(data)), np.zeros(len(data))
     for i in range(len(data)):
         r, ele, az = astropycoor.cartesian_to_spherical(data["beg_x"].iloc[i], data["beg_y"].iloc[i], data["beg_z"].iloc[i])
