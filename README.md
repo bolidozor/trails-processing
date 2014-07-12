@@ -7,8 +7,8 @@ Simple ipython3 notebook that views meteor trails loaded from csv table
 
 Dependencies:
 -------------
-python3.*
-ipython3-notebook
-astropy
-pandas
-numpy
+*python3.x
+*ipython3-notebook
+*astropy
+*pandas
+*numpy
