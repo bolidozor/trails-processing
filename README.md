@@ -11,6 +11,5 @@ Dependencies:
 -------------
  * python3.x
  * ipython3-notebook
- * astropy
  * pandas
  * numpy
