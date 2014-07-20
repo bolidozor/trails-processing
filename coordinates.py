@@ -2,6 +2,11 @@
 import math
 import datetime
 
+def cartesian_to_horizontal(x, y, z):
+    ele = math.degrees(math.atan2(z, math.sqrt(x * x + y * y)))
+    az = math.degrees(math.atan2(y, x))
+    return math.sqrt(x * x + y * y + z * z), ele, az
+
 def horizontal_to_equatorial(az, ele, lat):
     az, ele = math.radians(az), math.radians(ele)
     at = math.radians(lat)

@@ -9,7 +9,6 @@ import math
 import pandas as pd
 import calendar as cal
 import numpy as np
-from astropy import coordinates as astropycoor
 import meteors
 
 
@@ -101,14 +100,12 @@ def build_trails_data(data):
     """
     beg_dec, beg_ra, end_dec, end_ra = np.zeros(len(data)), np.zeros(len(data)), np.zeros(len(data)), np.zeros(len(data))
     for i in range(len(data)):
-        r, ele, az = astropycoor.cartesian_to_spherical(data["beg_x"].iloc[i], data["beg_y"].iloc[i], data["beg_z"].iloc[i])
-        ele, az = math.degrees(ele), math.degrees(az)
+        r, ele, az = coordinates.cartesian_to_horizontal(data["beg_x"].iloc[i], data["beg_y"].iloc[i], data["beg_z"].iloc[i])
         dec, ra = coordinates.horizontal_to_equatorial2(az + 180, ele, data["lat"].iloc[i], data["lon"].iloc[i], \
                                                         cal.timegm(time.strptime(data["date"].iloc[i], "%Y-%m-%d %H:%M:%S")))
         beg_dec[i], beg_ra[i] = dec, ra * 15
         
-        r, ele, az = astropycoor.cartesian_to_spherical(data["end_x"].iloc[i], data["end_y"].iloc[i], data["end_z"].iloc[i])
-        ele, az = math.degrees(ele), math.degrees(az)
+        r, ele, az = coordinates.cartesian_to_horizontal(data["end_x"].iloc[i], data["end_y"].iloc[i], data["end_z"].iloc[i])
         dec, ra = coordinates.horizontal_to_equatorial2(az + 180, ele, data["lat"].iloc[i], data["lon"].iloc[i], \
                                                         cal.timegm(time.strptime(data["date"].iloc[i], "%Y-%m-%d %H:%M:%S")))
         end_dec[i], end_ra[i] = dec, ra * 15

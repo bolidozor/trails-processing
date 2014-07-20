@@ -3,7 +3,7 @@ import pandas as pd
 
 def load_from_csv(path):
     return pd.read_csv(path, names = ["num", "beg_x", "beg_y", "beg_z", "end_x",
-                                                               "end_y", "end_z", "lat","lon", "date", "observer"])
+                                      "end_y", "end_z", "lat","lon", "date", "observer"])
 
 def fix_position(data):
     observers = {}
