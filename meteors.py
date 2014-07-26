@@ -8,7 +8,7 @@ def load_data(path_or_address):
     data = pd.read_csv(path_or_address, names = ["time", "beg_x", "beg_y", "beg_z", "end_x", "end_y", "end_z",
                                                  "lat","lon", "observer", "note"])
     for i in range(len(data)):
-        data.time[i] = datetime.fromtimestamp(int(data.time[i]) / 1e3).strftime("%Y-%m-%d %H:%M:%S")
+        data.time[i] = datetime.fromtimestamp(int(data.time[i]) / 1e3).strftime("%Y-%d-%m %H:%M:%S")
 
     return data
 

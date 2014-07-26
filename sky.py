@@ -102,12 +102,12 @@ def build_trails_data(data):
     for i in range(len(data)):
         r, ele, az = coordinates.cartesian_to_horizontal(data["beg_x"].iloc[i], data["beg_y"].iloc[i], data["beg_z"].iloc[i])
         dec, ra = coordinates.horizontal_to_equatorial2(az + 180, ele, data["lat"].iloc[i], data["lon"].iloc[i], \
-                                                        mktime(datetime.strptime(data["time"].iloc[i], "%Y-%m-%d %H:%M:%S").timetuple()))
+                                                        mktime(datetime.strptime(data["time"].iloc[i], "%Y-%d-%m %H:%M:%S").timetuple()))
         beg_dec[i], beg_ra[i] = dec, ra * 15
         
         r, ele, az = coordinates.cartesian_to_horizontal(data["end_x"].iloc[i], data["end_y"].iloc[i], data["end_z"].iloc[i])
         dec, ra = coordinates.horizontal_to_equatorial2(az + 180, ele, data["lat"].iloc[i], data["lon"].iloc[i], \
-                                                        mktime(datetime.strptime(data["time"].iloc[i], "%Y-%m-%d %H:%M:%S").timetuple()))
+                                                        mktime(datetime.strptime(data["time"].iloc[i], "%Y-%d-%m %H:%M:%S").timetuple()))
         end_dec[i], end_ra[i] = dec, ra * 15
     
     return [{"type": "LineString", "coordinates": [[beg_ra[i], beg_dec[i]],
