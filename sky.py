@@ -1,15 +1,15 @@
 import json
+import math
+import meteors
+import coordinates
+import pandas as pd
+import numpy as np
 from IPython.display import HTML
 from collections import defaultdict
+from datetime import datetime
 from gzip import GzipFile
 from math import copysign
-import coordinates
-import time
-import math
-import pandas as pd
-import calendar as cal
-import numpy as np
-import meteors
+from time import mktime
 
 
 def parse_hipparcos(lines, magnitude_threshold):
@@ -102,12 +102,12 @@ def build_trails_data(data):
     for i in range(len(data)):
         r, ele, az = coordinates.cartesian_to_horizontal(data["beg_x"].iloc[i], data["beg_y"].iloc[i], data["beg_z"].iloc[i])
         dec, ra = coordinates.horizontal_to_equatorial2(az + 180, ele, data["lat"].iloc[i], data["lon"].iloc[i], \
-                                                        cal.timegm(time.strptime(data["date"].iloc[i], "%Y-%m-%d %H:%M:%S")))
+                                                        mktime(datetime.strptime(data["time"].iloc[i], "%Y-%m-%d %H:%M:%S").timetuple()))
         beg_dec[i], beg_ra[i] = dec, ra * 15
         
         r, ele, az = coordinates.cartesian_to_horizontal(data["end_x"].iloc[i], data["end_y"].iloc[i], data["end_z"].iloc[i])
         dec, ra = coordinates.horizontal_to_equatorial2(az + 180, ele, data["lat"].iloc[i], data["lon"].iloc[i], \
-                                                        cal.timegm(time.strptime(data["date"].iloc[i], "%Y-%m-%d %H:%M:%S")))
+                                                        mktime(datetime.strptime(data["time"].iloc[i], "%Y-%m-%d %H:%M:%S").timetuple()))
         end_dec[i], end_ra[i] = dec, ra * 15
     
     return [{"type": "LineString", "coordinates": [[beg_ra[i], beg_dec[i]],
@@ -136,4 +136,4 @@ def starfield(data, magnitude_threshold = 5.0):
     return HTML(html)
 
 if __name__ == '__main__':
-    print (build_boundary_data()['CEP']['coordinates'][0])
+    print(build_boundary_data()['CEP']['coordinates'][0])
