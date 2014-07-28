@@ -9,7 +9,7 @@ def cartesian_to_horizontal(x, y, z):
 
 def horizontal_to_equatorial(az, ele, lat):
     az, ele = math.radians(az), math.radians(ele)
-    at = math.radians(lat)
+    lat = math.radians(lat)
     cd_ct = math.cos(ele) * math.cos(az) * math.sin(lat) \
             + math.sin(ele) * math.cos(lat)
     cd_st = math.cos(ele) * math.sin(az)
